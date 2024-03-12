@@ -15,7 +15,7 @@
 
 <!-- css tailwaind container for a nav section and its title -->
 <div class="container flex flex-col justify-center items-center w-full mx-auto py-3 md:max-w-sm border-solid border-white border-2 rounded-lg">
-	<h2 class="text-xl pb-1 font-bold">Combat Trainers</h2>
+	<h2 class="h2">Combat Trainers</h2>
 	<nav class="w-5/6 mx-auto flex flex-col justify-center items-center bg-primary-900 p-4 rounded-lg">
 		<ul class="flex-col mx-auto text-center">
 			<!-- loop through combat_trainers data to create anchors-->
