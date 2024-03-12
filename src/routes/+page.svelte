@@ -11,7 +11,7 @@
 	
 	
 	<!-- css tailwaind container for a nav section and its title -->
-	<div class="container flex flex-col justify-center items-center w-full mx-auto py-3 md:max-w-sm border-solid border-white border-2 rounded-lg">
+	<div class="container flex flex-col justify-center items-center w-full mx-auto py-3 max-w-xs md:max-w-sm border-solid border-white border-2 rounded-lg">
 		<h2 class="h2 mb-3">Combat Trainers</h2>
 		<nav class="w-5/6 mx-auto flex flex-col justify-center items-center bg-primary-900 p-4 rounded-lg">
 			<ul class="flex-col mx-auto text-center">
