@@ -1,4 +1,5 @@
 <script>
+  let isRunning = false;
   let countdown = null;
   const standard_combats = [
     "Twos",
@@ -32,6 +33,8 @@
   }
 
   function startProcess() {
+    if (isRunning) return
+    isRunning = true
     updateAndSpeakSet();
     countdown = 30;
     intervalId = setInterval(() => {
@@ -44,6 +47,8 @@
   }
 
   function stopProcess() {
+    if (!isRunning) return
+    isRunning = false
     clearInterval(intervalId);
     currentSet = "Prepare for combat";
     countdown = null;
@@ -56,8 +61,8 @@
   <div class="container mx-auto flex flex-col mx-auto mt-20 md:mt-1/3">
   <p class="instruction text-2xl text-center mb-5">{currentSet}</p>
   <div class="flex justify-center items-center gap-x-2 mb-2">
-    <button class="bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg" on:click={startProcess}>Start</button>
-    <button class="bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg" on:click={stopProcess}>Stop</button>
+    <button class={`${!isRunning ? '' : 'bg-tertiary-800 hover:bg-tertiary-800'} bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg`} on:click={startProcess} disabled={isRunning}>Start</button>
+    <button class={`${isRunning ? '' : 'bg-tertiary-800 hover:bg-tertiary-800'} bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg`}  on:click={stopProcess} disabled={!isRunning}>Stop</button>
   </div>
   {#if countdown !== null}
   <p class="countdown text-xl text-center mb-5">Time remaining: {countdown} seconds</p>
