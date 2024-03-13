@@ -1,60 +1,88 @@
 <script>
+  import {transitions} from '$lib/index.js'
+
+  // Props
   export let items = [];
-  export let itemCount = 2;
+  export let maxCount = 2;
+  export let minCount = 2;
+  export let transitions_present = false;
 
   let isRunning = false;
   let countdown = null;
-  let currentSet = "Prepare for combat";
+  let currentSet = ["Prepare for combat"];
   let intervalId;
 
   function getRandomItems() {
     let temp_items = [...items, ...items]; // double the array to allow repeats
     let result = [];
-    let count = Math.floor(Math.random() * (itemCount + 1 - 2)) + 2; // random number between 2 and itemCount
+    let count = Math.floor(Math.random() * (maxCount + 1 - 2)) + minCount; // random number between minCount and maxCount
 
     for(let i = 0; i < count; i++) {
       let index = Math.floor(Math.random() * temp_items.length);
       result.push(temp_items[index]);
       temp_items.splice(index, 1); // remove the selected element to avoid more than two repeats
     }
+    
+    if (transitions_present) {
+    // Add a random transition between combats within the results array
+    let resultWithTransitions = [];
+    for(let i = 0; i < result.length - 1; i++) {
+      resultWithTransitions.push(result[i]);
+      let transitionIndex = Math.floor(Math.random() * transitions.length);
+      resultWithTransitions.push(transitions[transitionIndex]);
+    }
+    resultWithTransitions.push(result[result.length - 1]); // add the last combat without a following transition
+    result = resultWithTransitions;
+  }
 
     return result;
   }
 
   function updateAndSpeakSet() {
-    let newSet = getRandomItems().join(', ');
-    currentSet = newSet;
-    window.speechSynthesis.speak(new SpeechSynthesisUtterance(newSet));
+    const set = getRandomItems();
+    let spokenSet = set.join(',');
+    currentSet = set;
+    let utterance = new SpeechSynthesisUtterance(spokenSet);
+    utterance.onend = () => {
+      if (!isRunning) return; // if isRunning is false, return immediately
+      clearInterval(intervalId); // clear the existing interval
+      countdown = 30;
+      intervalId = setInterval(() => { // start a new interval
+        if (countdown > 0) countdown--;
+        else {
+          clearInterval(intervalId); // clear the interval before updating and speaking the next set
+          updateAndSpeakSet();
+        }
+      }, 1000); // update every second
+    };
+    window.speechSynthesis.speak(utterance);
   }
 
-  function startProcess() {
-    if (isRunning) return
-    isRunning = true
-    updateAndSpeakSet();
-    countdown = 30;
-    intervalId = setInterval(() => {
-      if (countdown > 0) countdown--;
-      else {
-        updateAndSpeakSet();
-        countdown = 30;
-      }
-    }, 1000); // update every second
-  }
+function startProcess() {
+  if (isRunning) return;
+  isRunning = true;
+  updateAndSpeakSet();
+}
 
-  function stopProcess() {
-    if (!isRunning) return
-    isRunning = false
-    clearInterval(intervalId);
-    currentSet = "Prepare for combat";
-    countdown = null;
-  }
+function stopProcess() {
+  if (!isRunning) return;
+  isRunning = false;
+  clearInterval(intervalId);
+  window.speechSynthesis.cancel(); // stop the speech synthesis
+  currentSet = ["Prepare for combat"];
+  countdown = null;
+}
 </script>
 
 <div class="container pt-5 h-full mx-auto">
   <h1 class="h1 text-center mb-5">Standard Combats</h1>
 
   <div class="container mx-auto flex flex-col mx-auto mt-20 md:mt-1/3">
-  <p class="instruction text-2xl text-center mb-5">{currentSet}</p>
+  <div class="instruction text-2xl text-center mb-5">
+    {#each currentSet as instruction}
+    <p class="instruction text-2xl text-center mb-5">{instruction}</p>
+    {/each}
+  </div>
   <div class="flex justify-center items-center gap-x-2 mb-2">
     <button class={`${!isRunning ? '' : 'bg-tertiary-800 hover:bg-tertiary-800'} bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg`} on:click={startProcess} disabled={isRunning}>Start</button>
     <button class={`${isRunning ? '' : 'bg-tertiary-800 hover:bg-tertiary-800'} bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg`}  on:click={stopProcess} disabled={!isRunning}>Stop</button>
