@@ -79,9 +79,9 @@ function stopProcess() {
 
   <div class="container mx-auto flex flex-col mx-auto mt-20 md:mt-1/3">
   <div class="instruction text-2xl text-center mb-5">
-    {#each currentSet as instruction}
-    <p class="instruction text-2xl text-center mb-5">{instruction}</p>
-    {/each}
+    {#each currentSet as instruction, i}
+    <p class={`instruction text-2xl text-center mb-5 ${transitions_present && i % 2 !== 0 ? 'text-blue-500 italic' : ''}`}>{instruction}</p>
+  {/each}
   </div>
   <div class="flex justify-center items-center gap-x-2 mb-2">
     <button class={`${!isRunning ? '' : 'bg-tertiary-800 hover:bg-tertiary-800'} bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg`} on:click={startProcess} disabled={isRunning}>Start</button>
