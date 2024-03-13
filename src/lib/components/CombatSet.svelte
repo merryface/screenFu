@@ -6,11 +6,13 @@
   export let maxCount = 2;
   export let minCount = 2;
   export let transitions_present = false;
+  export let intervalTime = 30;
 
   let isRunning = false;
   let countdown = null;
   let currentSet = ["Prepare for combat"];
   let intervalId;
+
 
   function getRandomItems() {
     let temp_items = [...items, ...items]; // double the array to allow repeats
@@ -46,7 +48,7 @@
     utterance.onend = () => {
       if (!isRunning) return; // if isRunning is false, return immediately
       clearInterval(intervalId); // clear the existing interval
-      countdown = 30;
+      countdown = intervalTime;
       intervalId = setInterval(() => { // start a new interval
         if (countdown > 0) countdown--;
         else {
