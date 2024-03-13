@@ -1,5 +1,5 @@
 <script>
-  import CombatSet from '$lib/components/combatSet.svelte';
+  import CombatSet from '$lib/components/CombatSet.svelte';
   import SettingsModal from '$lib/components/SettingsModal.svelte';
   import { standard_combats } from '$lib/index.js'
 
