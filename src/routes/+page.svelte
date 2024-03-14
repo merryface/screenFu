@@ -7,16 +7,24 @@
 
 <div class="container pt-5 h-full mx-auto">	
 	<!-- css tailwaind container for a nav section and its title -->
-	<div class="container flex flex-col justify-center items-center w-full mx-auto py-3 max-w-xs md:max-w-sm border-solid border-white border-2 rounded-lg">
-		<h2 class="h2 mb-3">Combat Trainers</h2>
-		<nav class="w-5/6 mx-auto flex flex-col justify-center items-center bg-primary-900 p-4 rounded-lg">
-			<ul class="flex-col mx-auto text-center">
-				<!-- loop through combat_trainers data to create anchors-->
-				{#each combat_trainers as trainer}
-				<li class="hover:text-warning-700"><a href={trainer.route}>{trainer.name}</a></li>
-				{/each}
-			</ul>
-		</nav>
+	<div class="container mt-5">
+		<h2 class="h2 mb-2">Combat Trainers</h2>
+		<p>The Screen Fu Masters trainer. Practice the things you've learned with the Stage Fight folks in preparation for your next course.</p>
+		<p>Use the navlinks on the left to get you to the area you need to be.</p>
+		<p>Ready for the next course? Book in with Stage fight by clicking on the link bottom left.</p>
+
 	</div>
-	
 </div>
+
+<style>
+	.container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 5px;
+		text-align: center;
+	}
+	p {
+		margin-bottom: 1rem;
+	}
+</style>
