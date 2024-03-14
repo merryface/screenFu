@@ -13,5 +13,5 @@
   }
 </script>
 
-<SettingsModal {minCount} {maxCount} {intervalTime} {transitions_present} on:save={updateSettings} />
+<SettingsModal allowTransitions={false} {minCount} {maxCount} {intervalTime} {transitions_present} on:save={updateSettings} />
 <CombatSet title="Unarmed Combat" items={unarmed_standards} {minCount} {maxCount} {intervalTime} {transitions_present} />

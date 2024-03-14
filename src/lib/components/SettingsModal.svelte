@@ -6,6 +6,7 @@
   export let minCount = 2;
   export let maxCount = 4;
   export let intervalTime = 30;
+  export let allowTransitions = true;
   export let transitions_present = false;
   let showModal = false;
 
@@ -32,8 +33,10 @@
         <input id="intervalTime" type="range" min="15" max="120" bind:value={intervalTime} class="slider w-full" />
       </div>
       <div class="form-group">
-        <label for="transitions_present" class="block text-sm font-medium ">Transitions: {transitions_present ? 'ON' : 'OFF'}</label>
-        <SlideToggle id="transitions_present" name="slide" bind:checked={transitions_present} />
+        {#if allowTransitions}
+          <label for="transitions_present" class="block text-sm font-medium ">Transitions: {transitions_present ? 'ON' : 'OFF'}</label>
+          <SlideToggle id="transitions_present" name="slide" bind:checked={transitions_present} />
+        {/if}
       </div>
       <button type="submit" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-surface-600 hover:bg-success-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
       <button on:click={() => showModal = false} class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-warning-600 hover:bg-success-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Close</button>
