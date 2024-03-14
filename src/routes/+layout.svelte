@@ -2,6 +2,8 @@
 <script>
 	import '../app.postcss';
 	import { AppShell, AppBar, AppRail, AppRailTile, AppRailAnchor } from '@skeletonlabs/skeleton';
+	import { fade } from 'svelte/transition';
+	export let data;
 
 	let currentTile = 0;
 </script>
@@ -42,7 +44,11 @@
 			</svelte:fragment>
 		</AppRail>
 	</svelte:fragment>
-	<slot />
+	{#key data.pathname}
+	<main in:fade={{ duration: 300, delay: 400 }} out:fade={{ duration: 300 }}>
+		<slot />
+	</main>
+	{/key}
 </AppShell>
 
 
