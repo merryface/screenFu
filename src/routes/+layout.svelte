@@ -24,23 +24,39 @@
 	<!-- SIDEBAR -->
 	<svelte:fragment slot="sidebarLeft">
 		<AppRail height='h-full'>
-			<svelte:fragment slot="lead">
-				<AppRailAnchor href="/" >(icon)</AppRailAnchor>
-			</svelte:fragment>
+			<!-- Home link -->
 			<AppRailTile bind:group={currentTile} name="tile-1" value={0} title="tile-1">
-				<svelte:fragment slot="lead">(icon)</svelte:fragment>
-				<span>Tile 1</span>
+				<AppRailAnchor href="/" >
+					<svelte:fragment slot="lead">
+						<i class="fa-solid fa-house icon"></i>
+					</svelte:fragment>
+					<span>Home</span>
+				</AppRailAnchor>
 			</AppRailTile>
+
+			<!-- Standard Combats link -->
 			<AppRailTile bind:group={currentTile} name="tile-2" value={1} title="tile-2">
-				<svelte:fragment slot="lead">(icon)</svelte:fragment>
-				<span>Tile 2</span>
+				<AppRailAnchor href="/standard" >
+					<svelte:fragment slot="lead">
+						<i class="icon swords">⚔️</i>
+					</svelte:fragment>
+					<span>Standard Combats</span>
+				</AppRailAnchor>
 			</AppRailTile>
+
+			<!-- Unarmed Combats link -->
 			<AppRailTile bind:group={currentTile} name="tile-3" value={2} title="tile-3">
-				<svelte:fragment slot="lead">(icon)</svelte:fragment>
-				<span>Tile 3</span>
+				<AppRailAnchor href="/unarmed" >
+					<svelte:fragment slot="lead">
+						<i class="fa-solid fa-hand-fist icon"></i>
+					</svelte:fragment>
+					<span>Unarmed Combat</span>
+				</AppRailAnchor>
 			</AppRailTile>
+
+
 			<svelte:fragment slot="trail">
-				<AppRailAnchor href="/" target="_blank" title="Account">(icon)</AppRailAnchor>
+				<AppRailAnchor href="https://www.stagefight.co.uk/" target="_blank" title="StageFight">Stage Fight</AppRailAnchor>
 			</svelte:fragment>
 		</AppRail>
 	</svelte:fragment>
@@ -53,8 +69,12 @@
 
 
 <style>
-	.home {
+	.icon {
 		color: white;
 		font-size: 1.2rem;
+	}
+
+	.swords {
+		font-size: 1.5rem;
 	}
 </style>
