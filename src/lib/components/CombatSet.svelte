@@ -14,6 +14,8 @@
   let currentSet = ["Prepare for combat"];
   let intervalId;
 
+  const combatantRoleNeeded = (instruction, i) => instruction !== "Prepare for combat" && (!transitions_present || (transitions_present && i % 2 === 0))
+
 
   function getRandomItems() {
     let temp_items = [...items, ...items]; // double the array to allow repeats
@@ -81,10 +83,30 @@ function stopProcess() {
   <h1 class="h1 text-center mb-5">{title}</h1>
 
   <div class="container mx-auto flex flex-col mx-auto mt-20 md:mt-1/3">
-  <div class="instruction text-2xl text-center mb-5">
-    {#each currentSet as instruction, i}
-    <p class={`instruction text-2xl text-center mb-5 ${transitions_present && i % 2 !== 0 ? 'text-blue-500 italic' : ''}`}>{instruction}</p>
-  {/each}
+  <div class="instructions text-2xl text-center mb-5 w-5/6">
+{#each currentSet as instruction, i}
+  {#if combatantRoleNeeded(instruction, i)}
+    {#if Math.random() < 0.5}
+      <p class={`text-2xl text-center mb-5 border-2 border-error-500 text-error-500
+      ${transitions_present && i % 2 !== 0 ? 'text-blue-500 italic' : ''} 
+      ${instruction === "Prepare for combat" ? '' : ' instruction'}`}>
+        <span>A:</span> {instruction}
+      </p>
+    {:else}
+      <p class={`text-2xl text-center mb-5 border-2 border-warning-500 text-warning-500
+      ${transitions_present && i % 2 !== 0 ? 'text-blue-500 italic' : ''} 
+      ${instruction === "Prepare for combat" ? '' : ' instruction'}`}>
+        <span>B:</span> {instruction}
+      </p>
+    {/if}
+  {:else}
+    <p class={`text-2xl text-center mb-5
+    ${transitions_present && i % 2 !== 0 ? 'text-blue-500 italic' : ''} 
+    ${instruction === "Prepare for combat" ? '' : ' instruction'}`}>
+      {instruction}
+    </p>
+  {/if}
+{/each} 
   </div>
   <div class="flex justify-center items-center gap-x-2 mb-2">
     <button class={`${!isRunning ? '' : 'bg-tertiary-800 hover:bg-tertiary-800'} bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg`} on:click={startProcess} disabled={isRunning}>Start</button>
@@ -94,5 +116,21 @@ function stopProcess() {
   <p class="countdown text-xl text-center mb-5">Time remaining: {countdown} seconds</p>
 {/if}
   </div>
-
 </div>
+
+<style>
+  .container {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .instruction {
+    border-radius: 5px;
+    text-align: left;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    gap: 1rem;
+  }
+</style>
