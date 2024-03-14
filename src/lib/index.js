@@ -12,3 +12,14 @@ export const transitions = [
   "Bind",
   "Evasion"
 ]
+
+export const unarmed_standards = [
+  "Cross punch",
+  "Straight punch",
+  "Stomach punch",
+  "Blocked punch",
+  "Backfist",
+  "Push kick",
+  "Avoidance",
+  "Push"
+]
