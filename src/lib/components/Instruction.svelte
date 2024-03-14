@@ -6,7 +6,7 @@
 
   const styleForCurrentRole = () => {
     if(role === 'A') {
-      return ' border-2 border-error-500 text-error-500';
+      return ' border-2 border-success-500 text-success-500';
     }
     if(role === 'B') {
       return ' border-2 border-warning-500 text-warning-500';
