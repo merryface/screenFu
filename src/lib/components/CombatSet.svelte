@@ -1,4 +1,5 @@
 <script>
+	import Instruction from './Instruction.svelte';
   import {transitions} from '$lib/index.js'
 
   // Props
@@ -83,38 +84,23 @@ function stopProcess() {
   <h1 class="h1 text-center mb-5">{title}</h1>
 
   <div class="container mx-auto flex flex-col mx-auto mt-20 md:mt-1/3">
-  <div class="instructions text-2xl text-center mb-5 w-5/6">
-{#each currentSet as instruction, i}
-  {#if combatantRoleNeeded(instruction, i)}
-    {#if Math.random() < 0.5}
-      <p class={`text-2xl text-center mb-5 border-2 border-error-500 text-error-500
-      ${transitions_present && i % 2 !== 0 ? 'text-blue-500 italic' : ''} 
-      ${instruction === "Prepare for combat" ? '' : ' instruction'}`}>
-        <span>A:</span> {instruction}
-      </p>
-    {:else}
-      <p class={`text-2xl text-center mb-5 border-2 border-warning-500 text-warning-500
-      ${transitions_present && i % 2 !== 0 ? 'text-blue-500 italic' : ''} 
-      ${instruction === "Prepare for combat" ? '' : ' instruction'}`}>
-        <span>B:</span> {instruction}
-      </p>
+    <div class="instructions text-2xl text-center mb-5 w-5/6">
+      {#each currentSet as instruction, i}
+        <Instruction 
+          {instruction} 
+          {i} 
+          transitions_present={transitions_present} 
+          role={combatantRoleNeeded(instruction, i) ? (Math.random() < 0.5 ? 'A' : 'B') : null} 
+        />
+      {/each}
+    </div>
+    <div class="flex justify-center items-center gap-x-2 mb-2">
+      <button class={`${!isRunning ? '' : 'bg-tertiary-800 hover:bg-tertiary-800'} bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg`} on:click={startProcess} disabled={isRunning}>Start</button>
+      <button class={`${isRunning ? '' : 'bg-tertiary-800 hover:bg-tertiary-800'} bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg`}  on:click={stopProcess} disabled={!isRunning}>Stop</button>
+    </div>
+    {#if countdown !== null}
+      <p class="countdown text-xl text-center mb-5">Time remaining: {countdown} seconds</p>
     {/if}
-  {:else}
-    <p class={`text-2xl text-center mb-5
-    ${transitions_present && i % 2 !== 0 ? 'text-blue-500 italic' : ''} 
-    ${instruction === "Prepare for combat" ? '' : ' instruction'}`}>
-      {instruction}
-    </p>
-  {/if}
-{/each} 
-  </div>
-  <div class="flex justify-center items-center gap-x-2 mb-2">
-    <button class={`${!isRunning ? '' : 'bg-tertiary-800 hover:bg-tertiary-800'} bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg`} on:click={startProcess} disabled={isRunning}>Start</button>
-    <button class={`${isRunning ? '' : 'bg-tertiary-800 hover:bg-tertiary-800'} bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg`}  on:click={stopProcess} disabled={!isRunning}>Stop</button>
-  </div>
-  {#if countdown !== null}
-  <p class="countdown text-xl text-center mb-5">Time remaining: {countdown} seconds</p>
-{/if}
   </div>
 </div>
 
@@ -122,15 +108,5 @@ function stopProcess() {
   .container {
     justify-content: center;
     align-items: center;
-  }
-
-  .instruction {
-    border-radius: 5px;
-    text-align: left;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    padding-left: 1rem;
-    gap: 1rem;
   }
 </style>
