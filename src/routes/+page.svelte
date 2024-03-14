@@ -1,7 +1,6 @@
 <script>
 	const combat_trainers = [
 		{name: 'Standard Combats', route: '/standard'},
-		{name: 'SCs with Transitions', route: '/standard-transitions'},
 		{name: 'Unarmed Combat', route: '/unarmed'}
 	]
 </script>
