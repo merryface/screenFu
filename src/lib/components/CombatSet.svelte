@@ -2,6 +2,7 @@
   import {transitions} from '$lib/index.js'
 
   // Props
+  export let title = "Combat Set";
   export let items = [];
   export let maxCount = 2;
   export let minCount = 2;
@@ -77,7 +78,7 @@ function stopProcess() {
 </script>
 
 <div class="container pt-5 h-full mx-auto">
-  <h1 class="h1 text-center mb-5">Standard Combats</h1>
+  <h1 class="h1 text-center mb-5">{title}</h1>
 
   <div class="container mx-auto flex flex-col mx-auto mt-20 md:mt-1/3">
   <div class="instruction text-2xl text-center mb-5">
