@@ -5,10 +5,7 @@
 	]
 </script>
 
-<div class="container pt-5 h-full mx-auto">
-	<h1 class="h1 text-center mb-5">Screen Fu Masters</h1>
-	
-	
+<div class="container pt-5 h-full mx-auto">	
 	<!-- css tailwaind container for a nav section and its title -->
 	<div class="container flex flex-col justify-center items-center w-full mx-auto py-3 max-w-xs md:max-w-sm border-solid border-white border-2 rounded-lg">
 		<h2 class="h2 mb-3">Combat Trainers</h2>
