@@ -11,7 +11,11 @@
 	<svelte:fragment slot="header">
 		<AppBar>
 			<svelte:fragment slot="lead">Screen Fu Masters</svelte:fragment>
-			<svelte:fragment slot="trail">(actions)</svelte:fragment>
+			<svelte:fragment slot="trail">
+				<AppRailAnchor href="/">
+					<i class="fa-solid fa-house home"></i>
+				</AppRailAnchor>
+			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
 
@@ -40,3 +44,11 @@
 	</svelte:fragment>
 	<slot />
 </AppShell>
+
+
+<style>
+	.home {
+		color: white;
+		font-size: 1.2rem;
+	}
+</style>
