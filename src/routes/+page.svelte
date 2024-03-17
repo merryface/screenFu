@@ -1,10 +1,3 @@
-<script>
-	const combat_trainers = [
-		{name: 'Standard Combats', route: '/standard'},
-		{name: 'Unarmed Combat', route: '/unarmed'}
-	]
-</script>
-
 <div class="container pt-5 h-full mx-auto">	
 	<!-- css tailwaind container for a nav section and its title -->
 	<div class="container mt-5">
