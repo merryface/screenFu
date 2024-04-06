@@ -43,6 +43,7 @@
 					<span>Standard Combats</span>
 				</AppRailAnchor>
 			</AppRailTile>
+			
 
 			<!-- Unarmed Combats link -->
 			<AppRailTile bind:group={currentTile} name="tile-3" value={2} title="tile-3">
@@ -51,6 +52,16 @@
 						<i class="fa-solid fa-hand-fist icon"></i>
 					</svelte:fragment>
 					<span>Unarmed Combat</span>
+				</AppRailAnchor>
+			</AppRailTile>
+
+			<!-- Number system quiz -->
+			<AppRailTile bind:group={currentTile} name="tile-3" value={2} title="tile-3">
+				<AppRailAnchor href="/number-system-quiz" >
+					<svelte:fragment slot="lead">
+						?
+					</svelte:fragment>
+					<span>Defense Number Quiz</span>
 				</AppRailAnchor>
 			</AppRailTile>
 
