@@ -1,4 +1,5 @@
 <script>
+	import PictureQuestion from '$lib/components/PictureQuestion.svelte';
   let countdown = null;
   let quizRunning = false;
   let imgSource =''
@@ -18,16 +19,12 @@
   }
 </script>
 
+
 <div class="container pt-5 h-full mx-auto">
   <h1 class="h1 text-center mb-5">Numbers Quiz</h1>
 
   <div class="container flex flex-col mx-auto mt-20 md:mt-1/3">
-    <img src={imgSource} alt={imgAlt} class="question-img">
-    <div class="answerGrid grid grid-cols-3 gap-4 justify-items-center items-start">
-      {#each [1, 2, 3, 4, 5, 6, 7] as number}
-        <button type="button" class="btn variant-filled"on:click={() => buttonClick(number)}>{number}</button>
-      {/each}
-    </div>
+    <PictureQuestion imgSource={imgSource} imgAlt={imgAlt} correctAnswer={correctAnswer} buttonClick={buttonClick} />
   </div>
 
 
