@@ -41,7 +41,7 @@
 
   <div class="container flex flex-col mx-auto mt-20 md:mt-1/3">
     {#if quizRunning}
-      <PictureQuestion {imgSource} {imgAlt} {correctAnswer} {buttonClick} {isAnswerCorrect} />
+      <PictureQuestion {imgSource} {imgAlt} {buttonClick} {isAnswerCorrect}/>
     {:else}
       <button type="button" class="btn variant-filled" on:click={() => quizRunning = true}>Start Quiz</button>
     {/if}
