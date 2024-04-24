@@ -5,6 +5,7 @@
   // State Variables
   let quizRunning = false;
   let showNextButton = false;
+  let isAnswerCorrect = true;
 
   // Question related
   let currentQuestionIndex = 0;
@@ -20,7 +21,10 @@
 
   function buttonClick(number) {
     currentAnswer = number;
-    showNextButton = checkAnswer();
+    isAnswerCorrect = checkAnswer();
+    if (isAnswerCorrect) {
+      nextQuestion();
+    }
   }
 
   function nextQuestion() {
@@ -28,7 +32,6 @@
     imgSource = questions[currentQuestionIndex].imgSource;
     imgAlt = questions[currentQuestionIndex].imgAlt;
     correctAnswer = questions[currentQuestionIndex].correctAnswer;
-    showNextButton = false;
   }
 </script>
 
@@ -38,10 +41,7 @@
 
   <div class="container flex flex-col mx-auto mt-20 md:mt-1/3">
     {#if quizRunning}
-      <PictureQuestion {imgSource} {imgAlt} {correctAnswer} {buttonClick} />
-      {#if showNextButton}
-        <button type="button" class="btn variant-filled" on:click={nextQuestion}>NEXT</button>
-      {/if}
+      <PictureQuestion {imgSource} {imgAlt} {correctAnswer} {buttonClick} {isAnswerCorrect} />
     {:else}
       <button type="button" class="btn variant-filled" on:click={() => quizRunning = true}>Start Quiz</button>
     {/if}
