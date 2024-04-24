@@ -1,15 +1,17 @@
 <script>
+
   export let imgSource;
   export let imgAlt;
   export let buttonClick;
   export let isAnswerCorrect;
   $:shake = false;
 
+
   function shakeIt() {
     // timeout to stop the animation
     shake = isAnswerCorrect
     setTimeout(() => {
-      shake = true
+      shake = !isAnswerCorrect
     }, 5)
     
   }
@@ -18,7 +20,6 @@
     buttonClick(number)
     shakeIt()
   }
-
 </script>
 
 <div>
