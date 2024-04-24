@@ -1,21 +1,34 @@
 <script>
 	import PictureQuestion from '$lib/components/PictureQuestion.svelte';
-  let countdown = null;
+  import questions from '$lib/questions';
+
+  // State Variables
   let quizRunning = false;
-  let imgSource =''
-  let imgAlt = ''
+  let showNextButton = false;
+
+  // Question related
+  let currentQuestionIndex = 0;
   let currentAnswer = null;
-  let correctAnswer = 2
+  let imgSource = questions[currentQuestionIndex].imgSource;
+  let imgAlt = questions[currentQuestionIndex].imgAlt;
+  let correctAnswer = questions[currentQuestionIndex].correctAnswer;
 
-  const checkAnswer = () => currentAnswer === correctAnswer ? "Correct!" : "Incorrect. Try again"
+  // Timer related
+  let countdown = null;
 
-  function buttonClick(number, optionalFunction) {
+  const checkAnswer = () => currentAnswer === correctAnswer;
+
+  function buttonClick(number) {
     currentAnswer = number;
-    if (optionalFunction) {
-      optionalFunction();
-    }
-    checkAnswer();
-    console.log(checkAnswer())
+    showNextButton = checkAnswer();
+  }
+
+  function nextQuestion() {
+    currentQuestionIndex += 1;
+    imgSource = questions[currentQuestionIndex].imgSource;
+    imgAlt = questions[currentQuestionIndex].imgAlt;
+    correctAnswer = questions[currentQuestionIndex].correctAnswer;
+    showNextButton = false;
   }
 </script>
 
@@ -24,7 +37,14 @@
   <h1 class="h1 text-center mb-5">Numbers Quiz</h1>
 
   <div class="container flex flex-col mx-auto mt-20 md:mt-1/3">
-    <PictureQuestion imgSource={imgSource} imgAlt={imgAlt} correctAnswer={correctAnswer} buttonClick={buttonClick} />
+    {#if quizRunning}
+      <PictureQuestion {imgSource} {imgAlt} {correctAnswer} {buttonClick} />
+      {#if showNextButton}
+        <button type="button" class="btn variant-filled" on:click={nextQuestion}>NEXT</button>
+      {/if}
+    {:else}
+      <button type="button" class="btn variant-filled" on:click={() => quizRunning = true}>Start Quiz</button>
+    {/if}
   </div>
 
 
