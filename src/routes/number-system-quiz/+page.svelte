@@ -1,5 +1,6 @@
 <script>
-	import PictureQuestion from '$lib/components/PictureQuestion.svelte';
+  import { onMount } from 'svelte';
+  import PictureQuestion from '$lib/components/PictureQuestion.svelte';
   import questions from '$lib/questions';
 
   // State Variables
@@ -15,7 +16,8 @@
   let correctAnswer = questions[currentQuestionIndex].correctAnswer;
 
   // Timer related
-  let countdown = null;
+  $:countdown = 4;
+  let timerId = null;
 
   const checkAnswer = () => currentAnswer === correctAnswer;
 
@@ -32,6 +34,23 @@
     imgSource = questions[currentQuestionIndex].imgSource;
     imgAlt = questions[currentQuestionIndex].imgAlt;
     correctAnswer = questions[currentQuestionIndex].correctAnswer;
+    startCountdown();
+  }
+
+  function startCountdown() {
+    countdown = 4;
+    clearInterval(timerId);
+    timerId = setInterval(() => {
+      countdown -= 1;
+      if (countdown === 0) {
+        clearInterval(timerId);
+        nextQuestion();
+      }
+    }, 1000);
+  }
+
+  $: if (quizRunning) {
+    startCountdown();
   }
 </script>
 
