@@ -6,6 +6,7 @@
   let quizRunning = false;
   let showNextButton = false;
   let isAnswerCorrect = true;
+  let correctAnswers = 0;
 
   // Question related
   let currentQuestionIndex = 0;
@@ -25,6 +26,7 @@
     currentAnswer = number;
     isAnswerCorrect = checkAnswer();
     if (isAnswerCorrect) {
+      correctAnswers += 1;
       nextQuestion();
     }
   }
@@ -86,9 +88,10 @@
 
   <!-- timer -->
   <div class="timer mx-auto flex flex-col mx-auto md:mt-1/3">
-    <div class="instructions text-2xl mb-5 w-5/6 text-right">
+    <div class="data text-2xl mb-5 w-5/6 text-right">
     {#if quizRunning}
     <p class="countdown text-xl mb-5">{countdown} seconds</p>
+    <p class="score text-xl mb-5">{correctAnswers}/{currentQuestionIndex + 1}</p>
     {/if}
     </div>
   </div>
