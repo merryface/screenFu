@@ -32,6 +32,15 @@
 </div>
 
 <style>
+
+  img {
+    width: 95%;
+    max-width: 450px;
+    height: auto;
+    margin: auto;
+    margin-bottom: 2rem;
+  }
+
   .incorrect {
     animation: shake 0.5s;
     border: 2px solid red;
