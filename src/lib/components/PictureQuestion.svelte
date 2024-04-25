@@ -22,7 +22,7 @@
   }
 </script>
 
-<div>
+<div class="container">
   <img src={imgSource} alt={imgAlt} class:incorrect={shake} class="question-img"> 
   <div class="answerGrid grid grid-cols-3 gap-4 justify-items-center items-start">
     {#each [1, 2, 3, 4, 5, 6, 7] as number}
@@ -34,11 +34,15 @@
 <style>
 
   img {
-    width: 95%;
+    width: 85%;
     max-width: 450px;
     height: auto;
     margin: auto;
     margin-bottom: 2rem;
+  }
+
+  .answerGrid {
+    margin-top: -1rem;
   }
 
   .incorrect {

@@ -16,7 +16,7 @@
   let correctAnswer = questions[currentQuestionIndex].correctAnswer;
 
   // Timer related
-  $:countdown = 4;
+  $:countdown = 5;
   let timerId = null;
 
   const checkAnswer = () => currentAnswer === correctAnswer;
@@ -58,7 +58,7 @@
 <div class="container pt-5 h-full mx-auto">
   <h1 class="h1 text-center mb-5">Numbers Quiz</h1>
 
-  <div class="container flex flex-col mx-auto mt-20 md:mt-1/3">
+  <div class="container flex flex-col mx-auto md:mt-1/3">
     {#if quizRunning}
       <PictureQuestion {imgSource} {imgAlt} {buttonClick} {isAnswerCorrect}/>
     {:else}
@@ -68,11 +68,10 @@
 
 
   <!-- timer -->
-  <div class="container mx-auto flex flex-col mx-auto mt-20 md:mt-1/3">
-
-    <div class="instructions text-2xl text-center mb-5 w-5/6">
-    {#if countdown !== null}
-    <p class="countdown text-xl text-center mb-5">Time remaining: {countdown} seconds</p>
+  <div class="timer mx-auto flex flex-col mx-auto md:mt-1/3">
+    <div class="instructions text-2xl mb-5 w-5/6 text-right">
+    {#if quizRunning}
+    <p class="countdown text-xl mb-5">{countdown} seconds</p>
     {/if}
     </div>
   </div>
@@ -82,5 +81,13 @@
   .container {
     justify-content: center;
     align-items: center;
+    max-width: 280px;
+  }
+
+  .timer {
+    position: fixed;
+    right: 0;
+    bottom: 0%;
+    width: 10rem;
   }
 </style>
