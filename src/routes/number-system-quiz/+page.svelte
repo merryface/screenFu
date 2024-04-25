@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from 'svelte';
   import PictureQuestion from '$lib/components/PictureQuestion.svelte';
   import questions from '$lib/questions';
 
@@ -11,12 +10,13 @@
   // Question related
   let currentQuestionIndex = 0;
   let currentAnswer = null;
-  let imgSource = questions[currentQuestionIndex].imgSource;
-  let imgAlt = questions[currentQuestionIndex].imgAlt;
-  let correctAnswer = questions[currentQuestionIndex].correctAnswer;
+  let shuffledQuestions = shuffle(questions)
+  let imgSource = shuffledQuestions[currentQuestionIndex].imgSource;
+  let imgAlt = shuffledQuestions[currentQuestionIndex].imgAlt;
+  let correctAnswer = shuffledQuestions[currentQuestionIndex].correctAnswer;
 
   // Timer related
-  $:countdown = 5;
+  $:countdown = 10;
   let timerId = null;
 
   const checkAnswer = () => currentAnswer === correctAnswer;
@@ -31,14 +31,14 @@
 
   function nextQuestion() {
     currentQuestionIndex += 1;
-    imgSource = questions[currentQuestionIndex].imgSource;
-    imgAlt = questions[currentQuestionIndex].imgAlt;
-    correctAnswer = questions[currentQuestionIndex].correctAnswer;
+    imgSource = shuffledQuestions[currentQuestionIndex].imgSource;
+    imgAlt = shuffledQuestions[currentQuestionIndex].imgAlt;
+    correctAnswer = shuffledQuestions[currentQuestionIndex].correctAnswer;
     startCountdown();
   }
 
   function startCountdown() {
-    countdown = 4;
+    countdown = 10;
     clearInterval(timerId);
     timerId = setInterval(() => {
       countdown -= 1;
@@ -51,6 +51,23 @@
 
   $: if (quizRunning) {
     startCountdown();
+  }
+
+  function shuffle(array) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
   }
 </script>
 
