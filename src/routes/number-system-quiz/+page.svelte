@@ -4,7 +4,7 @@
 
   // State Variables
   let quizRunning = false;
-  let showNextButton = false;
+  let quizFinished = false;
   let isAnswerCorrect = true;
   let correctAnswers = 0;
 
@@ -32,11 +32,15 @@
   }
 
   function nextQuestion() {
-    currentQuestionIndex += 1;
-    imgSource = shuffledQuestions[currentQuestionIndex].imgSource;
-    imgAlt = shuffledQuestions[currentQuestionIndex].imgAlt;
-    correctAnswer = shuffledQuestions[currentQuestionIndex].correctAnswer;
-    startCountdown();
+    if (currentQuestionIndex < shuffledQuestions.length - 1) {
+      currentQuestionIndex += 1;
+      imgSource = shuffledQuestions[currentQuestionIndex].imgSource;
+      imgAlt = shuffledQuestions[currentQuestionIndex].imgAlt;
+      correctAnswer = shuffledQuestions[currentQuestionIndex].correctAnswer;
+      startCountdown();
+    } else {
+      quizFinished = true;
+    }
   }
 
   function startCountdown() {
@@ -71,6 +75,14 @@
 
     return array;
   }
+
+  function startQuiz() {
+    quizRunning = true;
+    quizFinished = false;
+    correctAnswers = 0;
+    currentQuestionIndex = 0;
+    startCountdown();
+  }
 </script>
 
 
@@ -79,9 +91,16 @@
 
   <div class="container flex flex-col mx-auto md:mt-1/3">
     {#if quizRunning}
-      <PictureQuestion {imgSource} {imgAlt} {buttonClick} {isAnswerCorrect}/>
+      {#if quizFinished}
+      <div class="summary">
+        <p class="final-score">Your score: {correctAnswers}/{shuffledQuestions.length}</p>
+        <button class="btn variant-filled" on:click={startQuiz}>Start Again</button>
+      </div>
+      {:else}
+        <PictureQuestion {imgSource} {imgAlt} {buttonClick} {isAnswerCorrect}/>
+      {/if}
     {:else}
-      <button type="button" class="btn variant-filled" on:click={() => quizRunning = true}>Start Quiz</button>
+      <button type="button" class="btn variant-filled" on:click={startQuiz}>Start Quiz</button>
     {/if}
   </div>
 
@@ -102,6 +121,24 @@
     justify-content: center;
     align-items: center;
     max-width: 280px;
+  }
+
+  .summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .final-score {
+    border: 2px solid;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    font-size: 1.5rem;
   }
 
   .timer {
