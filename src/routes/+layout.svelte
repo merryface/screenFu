@@ -56,7 +56,7 @@
 			</AppRailTile>
 
 			<!-- Number system quiz -->
-			<AppRailTile bind:group={currentTile} name="tile-3" value={2} title="tile-3">
+			<AppRailTile bind:group={currentTile} name="tile-4" value={3} title="tile-4">
 				<AppRailAnchor href="/number-system-quiz" >
 					<svelte:fragment slot="lead">
 						?
