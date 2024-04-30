@@ -5,7 +5,7 @@
 
   $: minCount = 2;
   $: maxCount = 4;
-  $: intervalTime = 30;
+  $: intervalTime = 10;
   $: transitions_present = false;
 
   function updateSettings(event) {

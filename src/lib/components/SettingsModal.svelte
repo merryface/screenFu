@@ -5,7 +5,7 @@
 
   export let minCount = 2;
   export let maxCount = 4;
-  export let intervalTime = 30;
+  export let intervalTime = 10;
   export let allowTransitions = true;
   export let transitions_present = false;
   let showModal = false;
@@ -22,15 +22,15 @@
     <form on:submit|preventDefault={saveSettings} class="space-y-4">
       <div class="form-group">
         <label for="minCount" class="block text-sm font-medium ">Min SCs: {minCount}</label>
-        <input id="minCount" type="range" min="2" max="4" bind:value={minCount} class="slider w-full" />
+        <input id="minCount" type="range" min="3" max="6" bind:value={minCount} class="slider w-full" />
       </div>
       <div class="form-group">
         <label for="maxCount" class="block text-sm font-medium ">Max SCs: {maxCount}</label>
-        <input id="maxCount" type="range" min={minCount} max="6" bind:value={maxCount} class="slider w-full" />
+        <input id="maxCount" type="range" min={minCount} max="12" bind:value={maxCount} class="slider w-full" />
       </div>
       <div class="form-group">
-        <label for="intervalTime" class="block text-sm font-medium ">Interval Time: {intervalTime}s</label>
-        <input id="intervalTime" type="range" min="15" max="120" bind:value={intervalTime} class="slider w-full" />
+        <label for="intervalTime" class="block text-sm font-medium ">Interval Time: {intervalTime} minutes</label>
+        <input id="intervalTime" type="range" min="5" max="60" bind:value={intervalTime} class="slider w-full" />
       </div>
       <div class="form-group">
         {#if allowTransitions}

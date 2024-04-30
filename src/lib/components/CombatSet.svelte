@@ -8,7 +8,7 @@
   export let maxCount = 2;
   export let minCount = 2;
   export let transitions_present = false;
-  export let intervalTime = 30;
+  export let intervalTime = 10;
 
   let isRunning = false;
   let countdown = null;
@@ -52,7 +52,7 @@
     utterance.onend = () => {
       if (!isRunning) return; // if isRunning is false, return immediately
       clearInterval(intervalId); // clear the existing interval
-      countdown = intervalTime;
+      countdown = intervalTime*60;
       intervalId = setInterval(() => { // start a new interval
         if (countdown > 0) countdown--;
         else {
