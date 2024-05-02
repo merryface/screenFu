@@ -12,7 +12,10 @@
 	<!-- HEADER -->
 	<svelte:fragment slot="header">
 		<AppBar>
-			<svelte:fragment slot="lead">Screen Fu Masters</svelte:fragment>
+			<svelte:fragment slot="lead">
+				Screen Fu Masters
+				<img class="header-icon" src="/android-chrome-192x192.png" alt="icon">
+			</svelte:fragment>
 			<svelte:fragment slot="trail">
 				<AppRailAnchor href="/">
 					<i class="fa-solid fa-house home"></i>
@@ -87,5 +90,11 @@
 
 	.swords {
 		font-size: 1.5rem;
+	}
+
+	.header-icon {
+		height: 100%;
+		max-height:2rem;
+		margin-left: 1rem;
 	}
 </style>
