@@ -2,6 +2,7 @@ export const standard_combats = [
   "Twos",
   "Threes",
   "First triangle",
+  "Second triangle",
   "Fours",
   "Fives",
 ]
@@ -10,7 +11,8 @@ export const transitions = [
   "Beat",
   "Guard beat",
   "Bind",
-  "Evasion"
+  "Evasion",
+  "Unarmed"
 ]
 
 export const unarmed_standards = [

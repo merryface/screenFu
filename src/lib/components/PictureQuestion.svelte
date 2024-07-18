@@ -24,7 +24,7 @@
 
 <div class="container">
   <img src={imgSource} alt={imgAlt} class:incorrect={shake} class="question-img"> 
-  <div class="answerGrid grid grid-cols-3 gap-4 justify-items-center items-start">
+  <div class="answerGrid grid grid-cols-3 gap-1 justify-items-center items-start">
     {#each [1, 2, 3, 4, 5, 6, 7] as number}
       <button type="button" class="btn variant-filled" on:click={() => {handleClick(number)}}>{number}</button>
     {/each}
@@ -67,5 +67,9 @@
     80% { transform: translate(-1px, -1px) rotate(1deg); }
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+
+  .btn {
+    width: 100%;
   }
 </style>

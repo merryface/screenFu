@@ -17,7 +17,7 @@
   let correctAnswer = shuffledQuestions[currentQuestionIndex].correctAnswer;
 
   // Timer related
-  $:countdown = 10;
+  $:countdown = 15;
   let timerId = null;
 
   const checkAnswer = () => currentAnswer === correctAnswer;
@@ -144,7 +144,7 @@
   .timer {
     position: fixed;
     right: 0;
-    bottom: 0%;
+    bottom: -5%;
     width: 10rem;
   }
 </style>
