@@ -8,18 +8,23 @@
   export let intervalTime = 10;
   export let allowTransitions = true;
   export let transitions_present = false;
+  export let currentStage = 1;
   let showModal = false;
 
   function saveSettings() {
-    dispatch('save', { minCount, maxCount, intervalTime, transitions_present });
+    dispatch('save', { minCount, maxCount, intervalTime, transitions_present, currentStage });
     showModal = false;
   }
 </script>
 
 <div class={`fixed inset-0 flex items-center justify-center z-50 mb-10 ${showModal ? '' : 'hidden'}`}>
-  <div class="bg-primary-500 p-5 rounded shadow-lg w-5/6 h-5/6">
+  <div class="modal-container bg-primary-500 p-5 rounded shadow-lg w-5/6 h-5/6">
     <h2 class="mb-4 text-xl">Settings</h2>
     <form on:submit|preventDefault={saveSettings} class="space-y-4">
+      <div class="form-group">
+        <label for="currentStage" class="block text-sm font-medium ">Current StageFight Level: {currentStage}</label>
+        <input id="currentStage" type="range" min="1" max="4" bind:value={currentStage} class="slider w-full" />
+      </div>
       <div class="form-group">
         <label for="minCount" class="block text-sm font-medium ">Min SCs: {minCount}</label>
         <input id="minCount" type="range" min="3" max="6" bind:value={minCount} class="slider w-full" />
@@ -45,3 +50,10 @@
 </div>
 
 <button on:click={() => showModal = !showModal} class="fixed bottom-5 right-5 p-2 bg-blue-500 text-white rounded hover:bg-blue-600 z-100">Settings</button>
+
+
+<style>
+  .modal-container {
+    border: 2px solid #fff
+  }
+</style>

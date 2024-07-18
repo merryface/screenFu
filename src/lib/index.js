@@ -1,10 +1,29 @@
-export const standard_combats = [
+const base_standard_combats = [
   "Twos",
   "Threes",
   "First triangle",
-  "Second triangle",
   "Fours",
   "Fives",
+]
+
+const level2_standard_combats = [
+  ...base_standard_combats,
+  "Second triangle",
+]
+
+const level3_standard_combats = [
+  ...level2_standard_combats,
+]
+
+const level4_standard_combats = [
+  ...level3_standard_combats,
+]
+
+export const all_standard_combats = [
+  base_standard_combats,
+  level2_standard_combats,
+  level3_standard_combats,
+  level4_standard_combats,
 ]
 
 export const transitions = [
