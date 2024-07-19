@@ -1,5 +1,5 @@
 <script>
-  import { RangeSlider } from '@skeletonlabs/skeleton';
+  import { RangeSlider, Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 
   let minMoves = 4
   let maxMoves = 12;
@@ -19,19 +19,31 @@
   <h1 class="h1 text-center">Pinking</h1>
 
   <div class="container mx-auto flex flex-col mx-auto mt-20 md:mt-1/3">
-    <RangeSlider name="range-slider" bind:value={minMoves} max={8} step={1} ticked>
-      <div class="flex justify-between items-center">
-        <div class="font-bold">Min number of Moves</div>
-        <div class="text-xs">{minMoves} / 4</div>
-      </div>
-    </RangeSlider>
-    <RangeSlider name="range-slider" bind:value={maxMoves} max={16} min={4} step={1} ticked>
-      <div class="flex justify-between items-center">
-        <div class="font-bold">Max number of Moves</div>
-        <div class="text-xs">{maxMoves} / 16</div>
-      </div>
-    </RangeSlider>
-
+    <div class="sliders">
+      <Accordion>
+        <AccordionItem open>
+          <svelte:fragment slot="lead">⚙️</svelte:fragment>
+          <svelte:fragment slot="summary">Settings</svelte:fragment>
+          <svelte:fragment slot="content">
+            <RangeSlider name="range-slider" bind:value={minMoves} max={8} step={1} ticked>
+              <div class="flex justify-between items-center">
+                <div class="font-bold">Min number of Moves</div>
+                <div class="text-xs">{minMoves} / 4</div>
+              </div>
+            </RangeSlider>
+            
+            <RangeSlider name="range-slider" bind:value={maxMoves} max={16} min={4} step={1} ticked>
+              <div class="flex justify-between items-center">
+                <div class="font-bold">Max number of Moves</div>
+                <div class="text-xs">{maxMoves} / 16</div>
+              </div>
+            </RangeSlider>
+          </svelte:fragment>
+        </AccordionItem>
+        <!-- ... -->
+      </Accordion>
+    </div>
+      
     <button class="bg-secondary-800 hover:bg-tertiary-700 font-bold py-2 px-4 rounded-lg" on:click={generateRoutine}>Generate Choreography</button>
     <div class="moves text-2xl text-center mb-5 w-5/6">
       {#each moves as move, i}
@@ -80,6 +92,12 @@
 
   .B {
     background-color: rgb(29, 119, 29);
+  }
+
+  .sliders {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 
 </style>
