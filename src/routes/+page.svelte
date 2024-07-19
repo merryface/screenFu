@@ -1,4 +1,4 @@
-<div class="container pt-5 h-full mx-auto">	
+<div class="container pt-5 mx-auto">	
 	<!-- css tailwaind container for a nav section and its title -->
 	<div class="container mt-5">
 		<h2 class="h2 mb-2">Combat Trainers</h2>

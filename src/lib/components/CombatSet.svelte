@@ -15,6 +15,12 @@
   let currentSet = ["Prepare for combat"];
   let intervalId;
 
+  // function to convert seconds to minutes and seconds
+  const secondsToMinutes = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds}`;
+  }
   const combatantRoleNeeded = (instruction, i) => instruction !== "Prepare for combat" && (!transitions_present || (transitions_present && i % 2 === 0))
 
   function randomIntFromInterval(min, max) { // min and max included 
@@ -84,7 +90,7 @@ function stopProcess() {
 }
 </script>
 
-<div class="container pt-5 h-full mx-auto">
+<div class="container pt-5 mx-auto">
   <h1 class="h1 text-center mb-5">{title}</h1>
 
   <div class="container mx-auto flex flex-col mx-auto mt-20 md:mt-1/3">
@@ -98,12 +104,12 @@ function stopProcess() {
         />
       {/each}
     </div>
-    <div class="flex justify-center items-center gap-x-2 mb-2">
+    <div class="btns flex justify-center items-center gap-x-2 mb-2">
       <button class={`${!isRunning ? '' : 'bg-tertiary-800 hover:bg-tertiary-800'} bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg`} on:click={startProcess} disabled={isRunning}>Start</button>
       <button class={`${isRunning ? '' : 'bg-tertiary-800 hover:bg-tertiary-800'} bg-primary-700 hover:bg-primary-800 text-white font-bold py-2 px-4 rounded-lg`}  on:click={stopProcess} disabled={!isRunning}>Stop</button>
     </div>
     {#if countdown !== null}
-      <p class="countdown text-xl text-center mb-5">Time remaining: {countdown} seconds</p>
+      <p class="countdown text-xl text-center mb-5">Time remaining: {secondsToMinutes(countdown)}</p>
     {/if}
   </div>
 </div>
@@ -112,5 +118,14 @@ function stopProcess() {
   .container {
     justify-content: center;
     align-items: center;
+  }
+
+  .btns {
+    margin-bottom: 2rem;
+  }
+
+  .countdown {
+    width: 80%;
+    margin-bottom: 5rem;
   }
 </style>

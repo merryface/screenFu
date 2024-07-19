@@ -26,7 +26,7 @@
 
 	<!-- SIDEBAR -->
 	<svelte:fragment slot="sidebarLeft">
-		<AppRail height='h-full'>
+		<AppRail>
 			<!-- Home link -->
 			<AppRailTile bind:group={currentTile} name="tile-1" value={0} title="tile-1">
 				<AppRailAnchor href="/" >

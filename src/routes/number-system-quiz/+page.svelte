@@ -86,7 +86,7 @@
 </script>
 
 
-<div class="container pt-5 h-full mx-auto">
+<div class="container pt-5 mx-auto">
   <h1 class="h1 text-center mb-5">Numbers Quiz</h1>
 
   <div class="container flex flex-col mx-auto md:mt-1/3">
