@@ -17,11 +17,15 @@
 
   const combatantRoleNeeded = (instruction, i) => instruction !== "Prepare for combat" && (!transitions_present || (transitions_present && i % 2 === 0))
 
+  function randomIntFromInterval(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 
   function getRandomItems() {
     let temp_items = [...items, ...items]; // double the array to allow repeats
     let result = [];
-    let count = Math.floor(Math.random() * (maxCount + 1 - 2)) + minCount; // random number between minCount and maxCount
+    let count = randomIntFromInterval(minCount, maxCount);// random number between minCount and maxCount
 
     for(let i = 0; i < count; i++) {
       let index = Math.floor(Math.random() * temp_items.length);
