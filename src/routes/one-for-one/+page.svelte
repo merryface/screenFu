@@ -28,7 +28,7 @@
             <RangeSlider name="range-slider" bind:value={minMoves} max={8} step={1} ticked>
               <div class="flex justify-between items-center">
                 <div class="font-bold">Min number of Moves</div>
-                <div class="text-xs">{minMoves} / 4</div>
+                <div class="text-xs">{minMoves} / 8</div>
               </div>
             </RangeSlider>
             
