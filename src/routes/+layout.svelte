@@ -69,6 +69,17 @@
 			</AppRailTile>
 
 
+			<!-- Pinking -->
+			<AppRailTile bind:group={currentTile} name="tile-5" value={4} title="tile-5">
+				<AppRailAnchor href="/one-for-one" >
+					<svelte:fragment slot="lead">
+						<i class="icon swords">🗡️</i>
+					</svelte:fragment>
+					<span>Pinking</span>
+				</AppRailAnchor>
+			</AppRailTile>
+
+
 			<svelte:fragment slot="trail">
 				<AppRailAnchor href="https://www.stagefight.co.uk/" target="_blank" title="StageFight">Stage Fight</AppRailAnchor>
 			</svelte:fragment>
