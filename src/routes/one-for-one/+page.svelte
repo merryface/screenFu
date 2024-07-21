@@ -27,14 +27,14 @@
           <svelte:fragment slot="content">
             <RangeSlider name="range-slider" bind:value={minMoves} max={8} step={1} ticked>
               <div class="flex justify-between items-center">
-                <div class="font-bold">Min number of Moves</div>
+                <div class="font-bold">Min Moves</div>
                 <div class="text-xs">{minMoves} / 8</div>
               </div>
             </RangeSlider>
             
             <RangeSlider name="range-slider" bind:value={maxMoves} max={16} min={4} step={1} ticked>
               <div class="flex justify-between items-center">
-                <div class="font-bold">Max number of Moves</div>
+                <div class="font-bold">Max Moves</div>
                 <div class="text-xs">{maxMoves} / 16</div>
               </div>
             </RangeSlider>
