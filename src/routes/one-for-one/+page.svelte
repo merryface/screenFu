@@ -98,6 +98,8 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    width: 90%;
+    max-width: 800px;
   }
 
 </style>
